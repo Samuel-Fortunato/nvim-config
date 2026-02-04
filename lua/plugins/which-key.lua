@@ -5,7 +5,8 @@ return {
 	opts = {
 		preset = "helix",
 		spec = {
-			{ "<leader>f", group = "Find", icon = " " }, -- Added a search icon too!
+			{ "<leader>f", group = "Find", icon = " " },
+			{ "<leader>e", group = "File Explorer", icon = "󰙅 " },
 		},
 	},
 	keys = {
