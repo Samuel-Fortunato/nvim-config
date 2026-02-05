@@ -1,7 +1,6 @@
 vim.g.mapleader = " "				
 
 -- <leader> keymaps
-vim.keymap.set("n", "<leader>d", vim.cmd.Ex, { desc = "Directory view (Ex)" })
 
 -- other keymaps
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
