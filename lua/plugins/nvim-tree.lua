@@ -37,6 +37,8 @@ return {
 			map("R", api.tree.reload, "Refresh")
 			map(".", api.tree.toggle_hidden_filter, "Toggle Dotfiles")
 			map("q", api.tree.close, "Close Tree")
+			map(">", api.tree.change_root_to_node, "CD into directory")
+			map("<", api.tree.change_root_to_parent, "Up one level")
 
 			-- file ops
 			map("n", api.fs.create, "New")
