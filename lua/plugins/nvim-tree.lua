@@ -3,11 +3,17 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	keys = {
-		{ "<leader>ee", "<cmd>NvimTreeFocus<cr>", desc = "Focus Explorer" },
-		{ "<leader>ex", "<cmd>NvimTreeClose<cr>", desc = "Close Explorer" },
-		{ "<leader>ef", "<cmd>NvimTreeFindFile <cr>", desc = "Find Current File" },
+		{ "<leader>ee", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
+		{ "<leader>ef", "<cmd>NvimTreeFindFile<cr>", desc = "Find Current File" },
+		{ "<leader>er", "<cmd>NvimTreeRefresh<cr>", desc = "Refresh Explorer" },
+		{ "<leader>ec", "<cmd>NvimTreeCollapse<cr>", desc = "Collapse all directories" },
 	},
 	opts = {
+		actions = {
+			open_file = {
+				quit_on_open = true,
+			},
+		},
 		on_attach = function(bufnr)
 			local api = require("nvim-tree.api")
 
