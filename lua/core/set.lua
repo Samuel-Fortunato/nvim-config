@@ -12,7 +12,7 @@ vim.opt.splitright = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
-vim.opt.tabstop = 8
-vim.opt.softtabstop = -1
-vim.opt.shiftwidth = 3
+vim.opt.tabstop = 3
+vim.opt.softtabstop = 0
+vim.opt.shiftwidth = 0
 vim.opt.expandtab = false
