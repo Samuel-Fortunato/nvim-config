@@ -3,7 +3,8 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	keys = {
-		{ "<leader>ee", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Explorer" },
+		{ "<leader>ee", "<cmd>NvimTreeFocus<cr>", desc = "Focus Explorer" },
+		{ "<leader>ex", "<cmd>NvimTreeClose<cr>", desc = "Close Explorer" },
 		{ "<leader>ef", "<cmd>NvimTreeFindFile<cr>", desc = "Find Current File" },
 		{ "<leader>er", "<cmd>NvimTreeRefresh<cr>", desc = "Refresh Explorer" },
 		{ "<leader>ec", "<cmd>NvimTreeCollapse<cr>", desc = "Collapse all directories" },
@@ -35,7 +36,6 @@ return {
 
 			-- tree control
 			map("R", api.tree.reload, "Refresh")
-			map(".", api.tree.toggle_hidden_filter, "Toggle Dotfiles")
 			map("q", api.tree.close, "Close Tree")
 			map(">", api.tree.change_root_to_node, "CD into directory")
 			map("<", api.tree.change_root_to_parent, "Up one level")
@@ -48,6 +48,7 @@ return {
 			map("p", api.fs.paste, "Paste")
 
 			-- QOL
+			map(".", api.tree.toggle_hidden_filter, "Toggle Dotfiles")
 			map("I", api.tree.toggle_gitignore_filter, "Toggle .gitignore")
 			map("C", api.tree.collapse_all, "Collapse All")
 		end,
