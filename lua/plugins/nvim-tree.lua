@@ -3,18 +3,13 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	lazy = false,
 	keys = {
-		{ "<leader>ee", "<cmd>NvimTreeFocus<cr>", desc = "Focus Explorer" },
+		{ "<leader>ee", "<cmd>NvimTreeOpen<cr>", desc = "Open Explorer" },
 		{ "<leader>ex", "<cmd>NvimTreeClose<cr>", desc = "Close Explorer" },
 		{ "<leader>ef", "<cmd>NvimTreeFindFile<cr>", desc = "Find Current File" },
 		{ "<leader>er", "<cmd>NvimTreeRefresh<cr>", desc = "Refresh Explorer" },
 		{ "<leader>ec", "<cmd>NvimTreeCollapse<cr>", desc = "Collapse all directories" },
 	},
 	opts = {
-		actions = {
-			open_file = {
-				quit_on_open = true,
-			},
-		},
 		on_attach = function(bufnr)
 			local api = require("nvim-tree.api")
 
@@ -33,6 +28,7 @@ return {
 			map("v", api.node.open.vertical, "Vertical Split")
 			map("s", api.node.open.horizontal, "Horizontal Split")
 			map("t", api.node.open.tab, "Open in New Tab")
+			map("<Tab>", api.node.open.preview, "Preview File")
 
 			-- tree control
 			map("R", api.tree.reload, "Refresh")
