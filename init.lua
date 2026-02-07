@@ -5,3 +5,4 @@ vim.g.loaded_netrwPlugin = 1
 require("core.set")
 require("core.mappings")
 require("core.lazy")
+require("core.lsp")

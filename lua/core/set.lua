@@ -3,6 +3,7 @@ vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 999
 vim.opt.showmode = false
+vim.opt.signcolumn = "yes:2"
 
 vim.opt.undofile = true
 
