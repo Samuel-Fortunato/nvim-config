@@ -1,6 +1,6 @@
 return {
     "mason-org/mason-lspconfig.nvim",
-	 lazy = false,
+	 event = { "BufReadPre", "BufNewFile" },
     opts = {},
     dependencies = {
         { "mason-org/mason.nvim", opts = {} },
