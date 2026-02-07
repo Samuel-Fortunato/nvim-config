@@ -3,7 +3,7 @@ return {
 	version = "*",
 	keys = {
 		{ [[<c-\>]], desc = "Toggle terminal" },
-		{ "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", desc = "LazyGit" },
+		{ "<leader>g", "<cmd>lua _Lazygit_toggle()<CR>", desc = "LazyGit" },
 	},
 	opts = {
 		open_mapping = [[<c-\>]],
@@ -29,7 +29,7 @@ return {
 	})
 
 	-- Define a global function so the keymap can find it
-	function _lazygit_toggle()
+	function _Lazygit_toggle()
 		lazygit:toggle()
 	end
 end
