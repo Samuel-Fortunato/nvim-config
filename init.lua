@@ -5,4 +5,5 @@ vim.g.loaded_netrwPlugin = 1
 require("core.set")
 require("core.mappings")
 require("core.lazy")
-require("core.lsp")
+require("lsp_config.diagnostics")
+require("lsp_config.keymaps")
