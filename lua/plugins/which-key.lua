@@ -2,6 +2,10 @@ return {
 	"folke/which-key.nvim",
 	name = "which-key",
 	event = "VeryLazy",
+	dependencies = {
+		{ 'nvim-mini/mini.nvim' },
+		{ "nvim-tree/nvim-web-devicons" },
+	},
 	opts = {
 		preset = "helix",
 		spec = {
