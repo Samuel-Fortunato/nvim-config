@@ -7,4 +7,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-vim.cmd("set completeopt+=noselect")
+vim.cmd("set completeopt+=noinsert")
