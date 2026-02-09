@@ -2,6 +2,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- <leader> keymaps
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Write buffer" })
+vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = "Write buffer and close window" })
+vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Close all windows" })
+vim.keymap.set("n", "<leader>p", "gq%", { desc = "Format whole document" })
 
 -- other keymaps
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
