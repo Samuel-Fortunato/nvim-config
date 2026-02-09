@@ -17,3 +17,4 @@ vim.opt.tabstop = 3
 vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = false
+vim.opt.breakindent = true
