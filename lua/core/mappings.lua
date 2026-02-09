@@ -17,7 +17,7 @@ vim.keymap.set("n", "<leader>p", function()
 end, { desc = "Format document" })
 
 -- Reload snippets
-keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/.config/nvim/LuaSnip/'})<CR>", { desc = "Reload LuaSnip snippets" })
+keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').lazy_load()<CR>", { desc = "Reload LuaSnip snippets" })
 
 -- other keymaps
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
