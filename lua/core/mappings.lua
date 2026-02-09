@@ -1,18 +1,30 @@
-vim.g.mapleader = " "				
+vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+local keymap = vim.keymap.set
+
 -- <leader> keymaps
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Write buffer" })
-vim.keymap.set("n", "<leader>wq", "<cmd>wq<cr>", { desc = "Write buffer and close window" })
-vim.keymap.set("n", "<leader>q", "<cmd>qa<cr>", { desc = "Close all windows" })
-vim.keymap.set("n", "<leader>p", "gq%", { desc = "Format whole document" })
+-- File and buffer operations
+keymap("n", "<leader>w", ":w<CR>", { desc = "Save current file" })
+keymap("n", "<leader>W", ":wa<CR>", { desc = "Save ALL open files" })
+keymap("n", "<leader>q", ":bd<CR>", { desc = "Close current buffer" })
+keymap("n", "<leader>Q", ":bd!<CR>", { desc = "Force quit current window" })
+keymap("n", "<leader>X", ":qa<CR>", { desc = "Exit Neovim" })
+
+-- Format the whole document
+vim.keymap.set("n", "<leader>p", function()
+    vim.lsp.buf.format({ async = true })
+end, { desc = "Format document" })
+
+-- Reload snippets
+keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/.config/nvim/LuaSnip/'})<CR>", { desc = "Reload LuaSnip snippets" })
 
 -- other keymaps
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
-vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
-vim.keymap.set("n", "<c-j>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
-vim.keymap.set("n", "<c-k>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+keymap("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+keymap("n", "<c-j>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+keymap("n", "<c-k>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Remove highlight
-vim.keymap.set("n", "<Esc>", vim.cmd.noh, { desc = "Clear search highlights" })
+keymap("n", "<Esc>", vim.cmd.noh, { desc = "Clear search highlights" })
