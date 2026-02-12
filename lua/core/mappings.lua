@@ -11,11 +11,6 @@ local keymap = vim.keymap.set
 -- keymap("n", "<leader>Q", ":bd!<CR>", { desc = "Force quit current window" })
 -- keymap("n", "<leader>X", ":qa<CR>", { desc = "Exit Neovim" })
 
--- Format the whole document
-vim.keymap.set("n", "<leader>p", function()
-    vim.lsp.buf.format({ async = true })
-end, { desc = "Format document" })
-
 -- Reload snippets
 keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').lazy_load()<CR>", { desc = "Reload LuaSnip snippets" })
 
