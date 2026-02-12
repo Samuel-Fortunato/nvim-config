@@ -4,12 +4,12 @@ vim.g.maplocalleader = " "
 local keymap = vim.keymap.set
 
 -- <leader> keymaps
--- File and buffer operations
-keymap("n", "<leader>w", ":w<CR>", { desc = "Save current file" })
-keymap("n", "<leader>W", ":wa<CR>", { desc = "Save ALL open files" })
-keymap("n", "<leader>q", ":bd<CR>", { desc = "Close current buffer" })
-keymap("n", "<leader>Q", ":bd!<CR>", { desc = "Force quit current window" })
-keymap("n", "<leader>X", ":qa<CR>", { desc = "Exit Neovim" })
+-- -- File and buffer operations
+-- keymap("n", "<leader>w", ":w<CR>", { desc = "Save current file" })
+-- keymap("n", "<leader>W", ":wa<CR>", { desc = "Save ALL open files" })
+-- keymap("n", "<leader>q", ":bd<CR>", { desc = "Close current buffer" })
+-- keymap("n", "<leader>Q", ":bd!<CR>", { desc = "Force quit current window" })
+-- keymap("n", "<leader>X", ":qa<CR>", { desc = "Exit Neovim" })
 
 -- Format the whole document
 vim.keymap.set("n", "<leader>p", function()
