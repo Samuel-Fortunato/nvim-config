@@ -49,6 +49,18 @@ return {
 			{ d(1, get_visual), i(2), rep(1) }
 		)
 	),
+	-- s({
+	-- 		trig = "beg",
+	-- 	},
+	-- 	fmta(
+	-- 		[[
+	-- 			\begin{<>}
+	-- 				<>
+	-- 			\end{<>}
+	-- 		]],
+	-- 		{ d(1, get_visual), i(2), rep(1) }
+	-- 	)
+	-- ),
 	s({
 			trig = "eq",
 			snippetType = "autosnippet",
