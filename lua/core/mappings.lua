@@ -10,9 +10,10 @@ local keymap = vim.keymap.set
 -- keymap("n", "<leader>q", ":bd<CR>", { desc = "Close current buffer" })
 -- keymap("n", "<leader>Q", ":bd!<CR>", { desc = "Force quit current window" })
 -- keymap("n", "<leader>X", ":qa<CR>", { desc = "Exit Neovim" })
-
+keymap("n", "<leader>p", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format whole document" })
 -- Reload snippets
-keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').lazy_load()<CR>", { desc = "Reload LuaSnip snippets" })
+keymap("n", "<leader>S", "<Cmd>lua require('luasnip.loaders.from_lua').lazy_load()<CR>",
+	{ desc = "Reload LuaSnip snippets" })
 
 -- other keymaps
 keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
@@ -22,4 +23,4 @@ keymap("n", "<c-j>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 keymap("n", "<c-k>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Remove highlight
-keymap("n", "<Esc>", vim.cmd.noh, { desc = "Clear search highlights" })
+keymap("n", "<Esc>", vim.cmd.nohlsearch, { desc = "Clear search highlights" })
