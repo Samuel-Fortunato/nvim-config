@@ -18,3 +18,14 @@ vim.opt.softtabstop = 0
 vim.opt.shiftwidth = 0
 vim.opt.expandtab = false
 vim.opt.breakindent = true
+
+vim.opt.inccommand = 'split'
+vim.opt.confirm = true
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+	desc = "Highlight text after yanking",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+})
