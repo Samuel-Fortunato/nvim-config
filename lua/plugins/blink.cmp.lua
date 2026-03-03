@@ -7,7 +7,7 @@ return {
 		keymap = { preset = "enter" },
 		completion = {
 			list = {
-				selection = { preselect = false, }
+				selection = { preselect = true, }
 			}
 		},
 		appearance = { nerd_font_variant = "normal" },
