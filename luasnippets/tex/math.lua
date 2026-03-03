@@ -1,70 +1,174 @@
----@diagnostic disable: undefined-global
+-- ~/.config/nvim/lua/snippets/tex/math.lua
+local ls = require("luasnip")
+local s = ls.snippet
+local sn = ls.snippet_node
+local i = ls.insert_node
+local f = ls.function_node
+local d = ls.dynamic_node
+local t = ls.text_node
+local fmta = require("luasnip.extras.fmt").fmta
+local rep = require("luasnip.extras").rep
+local postfix = require("luasnip.extras.postfix").postfix
 
-local get_visual = require('utils.luasnip-helpers').get_visual
+-- Helper for parsing simple strings into snippets
+local parse = ls.parser.parse_snippet
 
-local in_mathzone = function()
-  return vim.fn['vimtex#syntax#in_mathzone']() == 1
+local utils = require("luasnippets.tex.utils")
+local in_math = { condition = utils.in_mathzone }
+
+-- The Snippet Table
+local M = {}
+
+-------------------------------------------------------------------------
+-- 1. OPERATORS & COMMON MATH
+-------------------------------------------------------------------------
+local operators = {
+  -- Structure: { trigger, expansion }
+  { "sq", [[\sqrt{<>}]] },
+  { "ss", [[\sum_{<>}^{<>}]] },
+  { "pp", [[\prod_{<>}^{<>}]] },
+  { "ii", [[\int_{<>}^{<>}]] },
+  { "lim", [[\lim_{<> \to <>}]] },
+  { "bf", [[\mathbf{<>}]] },
+  { "txt", [[\text{<>}]] },
+  { "cal", [[\mathcal{<>}]] },
+  { "hat", [[\hat{<>}]] },
+  { "bar", [[\overline{<>}]] },
+}
+
+for _, op in ipairs(operators) do
+  table.insert(M, s({trig = op[1], snippetType="autosnippet", wordTrig=false},
+    fmta(op[2], { d(1, utils.get_visual), i(2) }), in_math
+  ))
 end
 
-return {
-	s({
-			trig = "ff",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\frac{<>}{<>}",
-			{ d(1, get_visual), i(2) }
-		)
-	),
-	s({
-			trig = "int",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\int_{<>}^{<>} <>",
-			{ i(1), i(2), d(1, get_visual) }
-		)
-	),
-	s({
-			trig = "sum",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\sum_{<>}^{<>} <>",
-			{ i(1), i(2), d(1, get_visual) }
-		)
-	),
-	s({
-			trig = "sqrt",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\sqrt{<>}",
-			{ d(1, get_visual) }
-		)
-	),
-	s({
-			trig = "dd",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\frac{d<>}{d<>}",
-			{ d(1, get_visual), i(2) }
-		)
-	),
-	s({
-			trig = "pp",
-			snippetType = "autosnippet",
-			condition = in_mathzone
-		},
-		fmta(
-			"\\frac{\\partial<>}{\\partial<>}",
-			{ d(1, get_visual), i(2) }
-		)
-	),
+-------------------------------------------------------------------------
+-- 2. SYMBOLS & RELATIONS
+-- Using parse_snippet for simple text replacements
+-------------------------------------------------------------------------
+local symbols = {
+  { "!=", [[\neq]] },
+  { "<=", [[\le]] },
+  { ">=", [[\ge]] },
+  { "=>", [[\implies]] },
+  { "=<", [[\impliedby]] },
+  { "->", [[\to]] },
+  { "!>", [[\mapsto]] },
+  { "cc", [[\subset]] },
+  { "inn", [[\in]] },
+  { "xx", [[\times]] },
+  { "cd", [[\cdot]] },
+  { "aa", [[\forall]] },
+  { "ee", [[\exists]] },
+  { "oo", [[\infty]] },
+  { "nab", [[\nabla]] },
+  { "par", [[\partial]] },
+  { "emp", [[\emptyset]] },
+  { "sim", [[\sim]] },
 }
+
+for _, sym in ipairs(symbols) do
+  table.insert(M, s({trig = sym[1], snippetType="autosnippet", wordTrig=false},
+    { t(sym[2].." ") }, in_math
+  ))
+end
+
+-------------------------------------------------------------------------
+-- 3. AUTO-BRACKETS
+-------------------------------------------------------------------------
+local brackets = {
+  { "((", [[\left( <> \right)]] },
+  { "[[", [[\left[ <> \right]]] },
+  { "{{", [[\left\{ <> \right\}]] },
+  { "||", [[\left| <> \right|]] },
+  { "ang", [[\langle <> \rangle]] },
+}
+
+for _, br in ipairs(brackets) do
+  table.insert(M, s({trig = br[1], snippetType="autosnippet", wordTrig=false},
+    fmta(br[2], { d(1, utils.get_visual) }), in_math
+  ))
+end
+
+-------------------------------------------------------------------------
+-- 4. SMART FRACTIONS
+-------------------------------------------------------------------------
+
+-- A. The Standard "ff" trigger
+-- Expands to \frac{<visual>}{}
+table.insert(M, s({trig = "ff", snippetType="autosnippet"},
+  fmta([[\frac{<>}{<>}]], { d(1, utils.get_visual), i(2) }), in_math
+))
+
+-- B. The Regex Trigger: 1/2 -> \frac{1}{2}
+-- Triggers on: (any number or letter)/(any number or letter)
+table.insert(M, s({trig = "([%w]+)/", regTrig = true, wordTrig = false, snippetType="autosnippet"},
+  fmta([[\frac{<>}{<>}]], {
+    f(function(_, snip) return snip.captures[1] end),
+    i(1)
+  }), in_math
+))
+
+-- C. Complex Fraction: (1+x)/ -> \frac{1+x}{}
+-- Triggers on a closing parenthesis followed immediately by /
+table.insert(M, s({trig = "^.*%)%/", regTrig = true, wordTrig = false, snippetType="autosnippet"},
+  fmta(
+    [[
+      \frac{<>}{<>}
+    ]],
+    {
+      f(function(_, snip)
+        -- Strip the closing parenthesis and slash, match the content inside
+        local match = string.match(snip.trigger, "%((.*)%)%/$")
+        return match
+      end),
+      i(1)
+    }
+  ), in_math
+))
+
+-------------------------------------------------------------------------
+-- 5. REGEX SUBSCRIPTS & SUPERSCRIPTS
+-------------------------------------------------------------------------
+
+-- A. Standard superscript: sr -> ^2
+table.insert(M, s({trig = "sr", snippetType="autosnippet", wordTrig = false},
+  { t("^2") }, in_math
+))
+
+-- B. Standard subscript: td -> ^{} (To the power of...)
+table.insert(M, s({trig = "td", snippetType="autosnippet", wordTrig = false},
+  fmta("^{<>}", { i(1) }), in_math
+))
+
+-- C. Subscript buffer: __ -> _{}
+table.insert(M, s({trig = "__", snippetType="autosnippet", wordTrig = false},
+  fmta("_{<>}", { i(1) }), in_math
+))
+
+-- D. The "x2sr" -> "x_2^2" Logic
+-- Captures a single digit preceding 'sr', moves it to subscript, adds squared
+table.insert(M, s({trig = "(%d)sr", regTrig = true, wordTrig = false, snippetType="autosnippet"},
+  fmta(
+    [[_<>^2]],
+    {
+      f(function(_, snip) return snip.captures[1] end)
+    }
+  ), in_math
+))
+
+-- E. Explicit Subscript + Superscript: x23 -> x_2^3
+-- Note: This is aggressive. Triggers on letter+digit+digit.
+-- Use with caution or lengthen trigger.
+table.insert(M, s({trig = "([%a])(%d)(%d)", regTrig = true, wordTrig = false, snippetType="autosnippet"},
+  fmta(
+    [[<>_<>^{<>}]],
+    {
+      f(function(_, snip) return snip.captures[1] end),
+      f(function(_, snip) return snip.captures[2] end),
+      f(function(_, snip) return snip.captures[3] end)
+    }
+  ), in_math
+))
+
+return M
