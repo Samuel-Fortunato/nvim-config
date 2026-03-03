@@ -7,7 +7,7 @@ return {
 	keys = {
 		{ "<leader>.",  function() Snacks.scratch() end,                desc = "Toggle Scratch Buffer" },
 		{ "<leader>S",  function() Snacks.scratch.select() end,         desc = "Select Scratch Buffer" },
-		{ "<leader>e",  function() Snacks.explorer() end,               desc = "Show file explorer" },
+		{ "<leader>e",  function() Snacks.explorer.reveal() end,          desc = "Show file explorer" },
 
 		{ "<leader>g",  function() Snacks.lazygit() end,                desc = "LazyGit" },
 		{ "<leader>n",  function() Snacks.notifier.hide() end,          desc = "Dismiss All Notifications" },
@@ -18,16 +18,27 @@ return {
 		{ "<leader>fh", function() Snacks.picker.help() end,            desc = "Help Pages" },
 		{ "<leader>:",  function() Snacks.picker.command_history() end, desc = "Command History" },
 
-		{ "<leader>T", function() Snacks.picker.colorschemes() end,    desc = "Select Theme" },
+		{ "<leader>T",  function() Snacks.picker.colorschemes() end,    desc = "Select Theme" },
 		{ "<leader>z",  function() Snacks.zen() end,                    desc = "Toggle Zen Mode" },
 	},
 	opts = {
 		bigfile = { enabled = true },
 		dashboard = { enabled = true },
-		explorer = { enabled = true },
+		explorer = {
+			enabled = true,
+			replace_netrw = true,
+			trash = true
+		},
 		indent = { enabled = true },
 		input = { enabled = true },
-		picker = { enabled = true },
+		picker = {
+			enabled = true,
+			sources = {
+				explorer = {
+					layout = { preset = "default", preview = true }
+				}
+			}
+		},
 		notifier = { enabled = true },
 		quickfile = { enabled = true },
 		scope = { enabled = true },
