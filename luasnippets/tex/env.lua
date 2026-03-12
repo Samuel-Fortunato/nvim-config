@@ -8,7 +8,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 
-local utils = require("luasnippets.tex.utils")
+local utils = require("utils.luasnip")
 
 return {
   -- Generic Environment: beg -> \begin{...} ... \end{...}

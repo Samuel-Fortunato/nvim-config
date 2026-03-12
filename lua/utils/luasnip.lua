@@ -1,4 +1,4 @@
--- ~/.config/nvim/lua/luasnippets/tex/utils.lua
+-- ~/.config/nvim/lua/utils/luasnip.lua
 local M = {}
 local ls = require("luasnip")
 local sn = ls.snippet_node

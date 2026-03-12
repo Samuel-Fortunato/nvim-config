@@ -13,7 +13,7 @@ local postfix = require("luasnip.extras.postfix").postfix
 -- Helper for parsing simple strings into snippets
 local parse = ls.parser.parse_snippet
 
-local utils = require("luasnippets.tex.utils")
+local utils = require("utils.luasnip")
 local in_math = { condition = utils.in_mathzone }
 
 -- The Snippet Table

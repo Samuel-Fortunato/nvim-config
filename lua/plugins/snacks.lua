@@ -7,10 +7,11 @@ return {
 	keys = {
 		{ "<leader>.",  function() Snacks.scratch() end,                desc = "Toggle Scratch Buffer" },
 		{ "<leader>S",  function() Snacks.scratch.select() end,         desc = "Select Scratch Buffer" },
-		{ "<leader>e",  function() Snacks.explorer.reveal() end,          desc = "Show file explorer" },
+		{ "<leader>e",  function() Snacks.explorer.open() end,          desc = "Show file explorer" },
 
 		{ "<leader>g",  function() Snacks.lazygit() end,                desc = "LazyGit" },
-		{ "<leader>n",  function() Snacks.notifier.hide() end,          desc = "Dismiss All Notifications" },
+		{ "<leader>nn", function() Snacks.notifier.hide() end,          desc = "Dismiss All Notifications" },
+		{ "<leader>nh", function() Snacks.notifier.show_history() end,          desc = "Dismiss All Notifications" },
 
 		{ "<leader>ff", function() Snacks.picker.files() end,           desc = "Find Files" },
 		{ "<leader>fb", function() Snacks.picker.buffers() end,         desc = "Buffers" },
@@ -35,6 +36,7 @@ return {
 			enabled = true,
 			sources = {
 				explorer = {
+					auto_close = true,
 					layout = { preset = "default", preview = true }
 				}
 			}
