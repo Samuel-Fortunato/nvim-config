@@ -11,7 +11,7 @@ return {
 
 		{ "<leader>g",  function() Snacks.lazygit() end,                desc = "LazyGit" },
 		{ "<leader>nn", function() Snacks.notifier.hide() end,          desc = "Dismiss All Notifications" },
-		{ "<leader>nh", function() Snacks.notifier.show_history() end,          desc = "Dismiss All Notifications" },
+		{ "<leader>nh", function() Snacks.notifier.show_history() end,  desc = "Show notification history" },
 
 		{ "<leader>ff", function() Snacks.picker.files() end,           desc = "Find Files" },
 		{ "<leader>fb", function() Snacks.picker.buffers() end,         desc = "Buffers" },

@@ -11,6 +11,7 @@ return {
 		spec = {
 			{ "<leader>f", group = "Find", icon = " " },
 			{ "<leader>e", group = "File Explorer", icon = "󰙅 " },
+			{ "<leader>n", group = "Notifications" },
 		},
 	},
 	keys = {
