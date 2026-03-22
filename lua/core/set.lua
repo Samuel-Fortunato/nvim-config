@@ -19,7 +19,6 @@ vim.opt.shiftwidth = 0
 vim.opt.expandtab = false
 vim.opt.breakindent = true
 
-vim.opt.inccommand = 'split'
 vim.opt.confirm = true
 
 -- Highlight when yanking
