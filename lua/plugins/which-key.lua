@@ -7,7 +7,7 @@ return {
 		{ "nvim-tree/nvim-web-devicons" },
 	},
 	opts = {
-		preset = "helix",
+		preset = "modern",
 		spec = {
 			{ "<leader>f", group = "Find", icon = " " },
 			{ "<leader>e", group = "File Explorer", icon = "󰙅 " },
